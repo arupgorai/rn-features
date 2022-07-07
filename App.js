@@ -1,65 +1,24 @@
 import React from 'react';
-import {SafeAreaView, ScrollView, StyleSheet, View, Text} from 'react-native';
+import {SafeAreaView, View, Text} from 'react-native';
+// import Icon from 'react-native-vector-icons/Ionicons';
+// import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from './constant/icons';
 
-const App = () => {
+export default function () {
   return (
     <SafeAreaView>
-      <View style={styles.headerContainer}>
-        <Text style={styles.heading}>Welcome to React Native</Text>
-        <Text style={styles.subHeading}>Features List</Text>
+      <View>
+        <Text>React Native</Text>
+        {/* <Icon name="md-menu" size={30} /> */}
+        {/* <Icon2 name="menu" size={30} /> */}
+        <Icon
+          type="Entypo"
+          name="chevron-small-down"
+          size={25}
+          color="red"
+          style={{marginTop: 10}}
+        />
       </View>
-      <ScrollView style={styles.listContainer}>
-        <View style={styles.listContainerWrap}>
-          <View style={styles.itemWrap}>
-            <Text style={styles.featureItem}>1. React Navit Vector Icons</Text>
-            <Text style={styles.branchName}>RNVectorIcons</Text>
-          </View>
-        </View>
-      </ScrollView>
     </SafeAreaView>
   );
-};
-
-export default App;
-
-const styles = StyleSheet.create({
-  headerContainer: {
-    backgroundColor: '#e2e2e2',
-    paddingVertical: 20,
-  },
-  heading: {
-    fontSize: 52,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    color: '#222',
-  },
-  subHeading: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    color: 'tomato',
-    marginTop: 15,
-    textDecorationLine: 'underline',
-  },
-  listContainer: {
-    height: '100%',
-  },
-  listContainerWrap: {
-    paddingHorizontal: 15,
-    paddingVertical: 10,
-  },
-  itemWrap: {
-    marginBottom: 6,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  featureItem: {
-    fontSize: 14,
-  },
-  branchName: {
-    fontSize: 16,
-    fontStyle: 'italic',
-    fontWeight: 'bold',
-  },
-});
+}
