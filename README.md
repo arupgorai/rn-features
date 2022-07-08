@@ -1,4 +1,4 @@
-# RNVectorIcons
+# CustomFontsAndSvg
 
 #### This branch contains how to add custom fonts to your local [React Native](https://reactnative.dev/docs/getting-started) project.
 
