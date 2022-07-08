@@ -6,6 +6,6 @@
 
 > This branch contains how can we add react-native-vector-icons package in our project for both the platforms.
 
-#### 1. [CustomFontsAndSvg](https://github.com/arupgorai/rn-features/tree/CustomFontsAndSvg)
+#### 2. [CustomFontsAndSvg](https://github.com/arupgorai/rn-features/tree/CustomFontsAndSvg)
 
 > This branch contains how can we add custom fonts in your react-native project.
