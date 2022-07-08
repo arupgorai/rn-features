@@ -1,58 +1,59 @@
 # RNVectorIcons
 
-#### This branch contains how to add [react-native-vector-icons](https://www.npmjs.com/package/react-native-vector-icons) package to your [React-Native](https://reactnative.dev/docs/0.68/getting-started) Project for both platforms.
+#### This branch contains how to add custom fonts to your local [React Native](https://reactnative.dev/docs/getting-started) project.
 
-## Setup for IOS 👇
+> Here, in this documentation we'll learn two ways to add custom fonts. One is very easy and quick which is recently introduced to `react-native version 0.69` and the second method is manually configuration for both android and ios.
 
-#### 1. Install package.
+## Method 1 👇
 
-```sh
-npm install react-native-vector-icons
-```
-
-#### 2. Install pods.
+1. Add `assets` folder at root directory and inside `assets` folder create one more folder called `fonts`. i.e `assets/fonts`.
+2. Add all your `fonts`/`.ttf` files that you've downloaded in `fonts` folder.
+3. Create `react-native.config.js` file at root directory and mention your `fonts` folder location in that file as below 👇
 
 ```sh
-cd ios && pod install
+module.exports = {
+  ios: {},
+  android: {},
+  assets: ['./assets/fonts/'],
+};
 ```
 
-#### 3. Add icon fonts to `info.plist` file.
+4. Run below command in your terminal to link those assets to your native directory for both android and ios.
+
+```sh
+npx react-native-asset
+```
+
+5. mention font name as font-family in your `<Text>` component as style.
+
+```sh
+<Text
+    style={{
+        fontFamily: 'Roboto-BoldItalic',
+    }}>
+      React Native
+</Text>
+```
+
+6. Re-run your metro server and re-build your app
+
+#### Optional _`Extra Step`_
+
+In case if it doesn't work for ios pease add all you custom fonts in `info.plist` file
 
 ```sh
 <key>UIAppFonts</key>
-<array>
-  <string>AntDesign.ttf</string>
-  <string>Entypo.ttf</string>
-  <string>EvilIcons.ttf</string>
-  <string>Feather.ttf</string>
-  <string>FontAwesome.ttf</string>
-  <string>FontAwesome5_Brands.ttf</string>
-  <string>FontAwesome5_Regular.ttf</string>
-  <string>FontAwesome5_Solid.ttf</string>
-  <string>Foundation.ttf</string>
-  <string>Ionicons.ttf</string>
-  <string>MaterialIcons.ttf</string>
-  <string>MaterialCommunityIcons.ttf</string>
-  <string>SimpleLineIcons.ttf</string>
-  <string>Octicons.ttf</string>
-  <string>Zocial.ttf</string>
-  <string>Fontisto.ttf</string>
-</array>
+	<array>
+	  ...
+		<string>Inter-Bold.ttf</string>
+		<string>Inter-ExtraBold.ttf</string>
+		<string>Inter-Light.ttf</string>
+		...
+	</array>
 ```
 
-## Setup for Android 👇
+## Method 2 👇
 
-#### For Android go to in your app `android/app/android.gradle` file. then add this code below the end of the code.
+#### `manually configure` your assets.
 
-```sh
-apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
-```
-
-## Now Import icons from package and test it in your code.
-
-```sh
-import Icon from 'react-native-vector-icons/Ionicons';
-<Icon name="md-menu" size={30} />
-```
-
-### and we're done with these little few steps 😄
+follow the steps 1, 2 and 3 of `method 1` from above which are common in this method also. 4. Add all you fonts in `android>app>src>main>assets>fonts` folder for android. 5. for ios make sure above `extra step` is done 6. open projectName.xcodeproj file in xcode. right click on your projectname and select `new group` option and named it `Resources`. 7. right click on `Resources` folder and select `Add files to projectName` then select all the fonts from `assets/fonts` folder, here all the fonts will be added which is pointing to `assets/fonts` folder fonts. 8. now click your projectName in xcode and select the target, select `build phases` and check `Copy Bundle Resources` option there all your fonts should linked. 9. now re-run metro bundler and re-build your ios app, it should work.
