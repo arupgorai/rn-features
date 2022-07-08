@@ -1,6 +1,7 @@
 import React from 'react';
 import {SafeAreaView, View, Text, TouchableOpacity} from 'react-native';
-import Icon from './constant/icons';
+import Icon from './src/constant/icons';
+import GameOn from './src/assets/images/misc/gaming.svg';
 
 export default function () {
   return (
@@ -11,7 +12,7 @@ export default function () {
         alignItems: 'center',
         backgroundColor: '#fff',
       }}>
-      <View>
+      <View style={{marginTop: 20}}>
         <Text
           style={{
             fontSize: 30,
@@ -21,6 +22,18 @@ export default function () {
           React Native
         </Text>
       </View>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <GameOn
+          width={300}
+          height={300}
+          style={{transform: [{rotate: '-15deg'}]}}
+        />
+      </View>
       <TouchableOpacity
         style={{
           backgroundColor: '#AD40AF',
@@ -29,6 +42,7 @@ export default function () {
           flexDirection: 'row',
           justifyContent: 'space-between',
           borderRadius: 5,
+          marginBottom: 40,
         }}>
         <Text
           style={{

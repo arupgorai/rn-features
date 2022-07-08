@@ -56,4 +56,49 @@ In case if it doesn't work for ios pease add all you custom fonts in `info.plist
 
 #### `manually configure` your assets.
 
-follow the steps 1, 2 and 3 of `method 1` from above which are common in this method also. 4. Add all you fonts in `android>app>src>main>assets>fonts` folder for android. 5. for ios make sure above `extra step` is done 6. open projectName.xcodeproj file in xcode. right click on your projectname and select `new group` option and named it `Resources`. 7. right click on `Resources` folder and select `Add files to projectName` then select all the fonts from `assets/fonts` folder, here all the fonts will be added which is pointing to `assets/fonts` folder fonts. 8. now click your projectName in xcode and select the target, select `build phases` and check `Copy Bundle Resources` option there all your fonts should linked. 9. now re-run metro bundler and re-build your ios app, it should work.
+> follow the steps 1, 2 and 3 of `method 1` from above which are common in this method also.
+
+4. Add all you fonts in `android>app>src>main>assets>fonts` folder for android.
+5. for ios make sure above `extra step` is done
+6. open projectName.xcodeproj file in xcode. right click on your projectname and select `new group` option and named it `Resources`.
+7. right click on `Resources` folder and select `Add files to projectName` then select all the fonts from `assets/fonts` folder, here all the fonts will be added which is pointing to `assets/fonts` folder fonts.
+8. now click your projectName in xcode and select the target, select `build phases` and check `Copy Bundle Resources` option there all your fonts should linked.
+9. now re-run metro bundler and re-build your ios app, it should work.
+
+# show svg images in RN-Project
+
+1. install these two pkgs [react-native-svg](https://www.npmjs.com/package/react-native-svg) and [react-native-svg-transformer](https://www.npmjs.com/package/react-native-svg-transformer)
+2. cd ios && pod install
+3. add the below code as given in docs in `metro.config.js` file, docs from [here](https://www.npmjs.com/package/react-native-svg-transformer).
+
+```sh
+...
+const {getDefaultConfig} = require('metro-config');
+
+module.exports = (async () => {
+  const {
+    resolver: {sourceExts, assetExts},
+  } = await getDefaultConfig();
+  return {
+    transformer: {
+      babelTransformerPath: require.resolve('react-native-svg-transformer'),
+    },
+    resolver: {
+      assetExts: assetExts.filter(ext => ext !== 'svg'),
+      sourceExts: [...sourceExts, 'svg'],
+    },
+  };
+})();
+```
+
+4. import svg img and use as component as below
+
+```sh
+import GamingSvgImage from './src/assets/images/misc/gaming.svg';
+...
+<GamingSvgImage
+  width={300}
+  height={300}
+  style={{transform: [{rotate: '-15deg'}]}}
+/>
+```
