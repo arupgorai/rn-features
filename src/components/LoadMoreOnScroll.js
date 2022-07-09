@@ -16,6 +16,7 @@ const LoadMoreOnScroll = () => {
   const [pageNo, setPageNo] = useState(1);
 
   const getData = async () => {
+    setIsLoading(true);
     console.log('getData CALLED');
     const apiURL = `${BASE_URL}/photos?_limit=10&_page=${pageNo}`;
 
@@ -55,7 +56,7 @@ const LoadMoreOnScroll = () => {
   };
 
   useEffect(() => {
-    setIsLoading(true);
+    // API Call here
     getData();
   }, [pageNo]);
 
@@ -68,6 +69,8 @@ const LoadMoreOnScroll = () => {
       ListFooterComponent={renderFooter}
       onEndReached={handleMore}
       onEndReachedThreshold={0.5}
+      refreshing={isLoading}
+      onRefresh={getData}
     />
   );
 };
