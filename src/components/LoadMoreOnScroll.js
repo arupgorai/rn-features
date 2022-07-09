@@ -6,16 +6,22 @@ import {
   FlatList,
   StyleSheet,
   ActivityIndicator,
+  TextInput,
+  Platform,
 } from 'react-native';
 
 const BASE_URL = 'https://jsonplaceholder.typicode.com';
 
 const LoadMoreOnScroll = () => {
   const [data, setData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [pageNo, setPageNo] = useState(1);
+  const [searchText, setSearchText] = useState('');
 
   const getData = async () => {
+    // avoid making api call if searchText exist for filter
+    if (!!searchText) return null;
     setIsLoading(true);
     console.log('getData CALLED');
     const apiURL = `${BASE_URL}/photos?_limit=10&_page=${pageNo}`;
@@ -28,6 +34,24 @@ const LoadMoreOnScroll = () => {
       console.log('Error :-', error);
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const searchFilter = text => {
+    if (text) {
+      const newData = data.filter(item => {
+        const itemData = item.title
+          ? item.title.toUpperCase()
+          : ''.toUpperCase();
+        const textData = text.toUpperCase();
+        return itemData.indexOf(textData) > -1;
+      });
+
+      setFilteredData(newData);
+      setSearchText(text);
+    } else {
+      setFilteredData(data);
+      setSearchText(text);
     }
   };
 
@@ -51,6 +75,7 @@ const LoadMoreOnScroll = () => {
   };
 
   const handleMore = () => {
+    if (!!searchText) return null;
     setPageNo(prevState => prevState + 1);
     setIsLoading(true);
   };
@@ -60,17 +85,35 @@ const LoadMoreOnScroll = () => {
     getData();
   }, [pageNo]);
 
+  useEffect(() => {
+    setFilteredData(data);
+  }, [data]);
+
   return (
     <FlatList
       style={styles.container}
-      data={data}
+      data={filteredData}
       renderItem={renderItem}
       keyExtractor={(item, index) => index.toString()}
+      ListHeaderComponent={
+        <View style={styles.inputWrap}>
+          <TextInput
+            value={searchText}
+            autoCapitalize="none"
+            autoCorrect={false}
+            clearButtonMode="always"
+            placeholder="Search"
+            onChangeText={searchFilter}
+            style={styles.inputStyle}
+          />
+        </View>
+      }
       ListFooterComponent={renderFooter}
       onEndReached={handleMore}
       onEndReachedThreshold={0.5}
       refreshing={isLoading}
       onRefresh={getData}
+      stickyHeaderIndices={[0]}
     />
   );
 };
@@ -101,5 +144,14 @@ const styles = StyleSheet.create({
   loader: {
     marginTop: 10,
     alignItems: 'center',
+  },
+  inputWrap: {paddingHorizontal: 15, marginBottom: 10},
+  inputStyle: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    paddingLeft: 10,
+    borderRadius: 6,
+    backgroundColor: '#fff',
+    height: Platform.OS === 'ios' ? 40 : 35,
   },
 });
