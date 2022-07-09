@@ -8,6 +8,7 @@ import {
   ActivityIndicator,
   TextInput,
   Platform,
+  TouchableOpacity,
 } from 'react-native';
 
 const BASE_URL = 'https://jsonplaceholder.typicode.com';
@@ -18,6 +19,8 @@ const LoadMoreOnScroll = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [pageNo, setPageNo] = useState(1);
   const [searchText, setSearchText] = useState('');
+
+  let listViewRef;
 
   const getData = async () => {
     // avoid making api call if searchText exist for filter
@@ -74,10 +77,22 @@ const LoadMoreOnScroll = () => {
     ) : null;
   };
 
+  const renderSeparator = () => {
+    return <View style={styles.separator} />;
+  };
+
   const handleMore = () => {
     if (!!searchText) return null;
     setPageNo(prevState => prevState + 1);
     setIsLoading(true);
+  };
+
+  const goToBottom = () => {
+    listViewRef.scrollToEnd({animated: true});
+  };
+
+  const goToTop = () => {
+    listViewRef.scrollToOffset({offset: 0, animated: true});
   };
 
   useEffect(() => {
@@ -90,31 +105,41 @@ const LoadMoreOnScroll = () => {
   }, [data]);
 
   return (
-    <FlatList
-      style={styles.container}
-      data={filteredData}
-      renderItem={renderItem}
-      keyExtractor={(item, index) => index.toString()}
-      ListHeaderComponent={
-        <View style={styles.inputWrap}>
-          <TextInput
-            value={searchText}
-            autoCapitalize="none"
-            autoCorrect={false}
-            clearButtonMode="always"
-            placeholder="Search"
-            onChangeText={searchFilter}
-            style={styles.inputStyle}
-          />
-        </View>
-      }
-      ListFooterComponent={renderFooter}
-      onEndReached={handleMore}
-      onEndReachedThreshold={0.5}
-      refreshing={isLoading}
-      onRefresh={getData}
-      stickyHeaderIndices={[0]}
-    />
+    <>
+      <FlatList
+        style={styles.container}
+        data={filteredData}
+        renderItem={renderItem}
+        keyExtractor={(item, index) => index.toString()}
+        ListHeaderComponent={
+          <View style={styles.inputWrap}>
+            <TextInput
+              value={searchText}
+              autoCapitalize="none"
+              autoCorrect={false}
+              clearButtonMode="always"
+              placeholder="Search"
+              onChangeText={searchFilter}
+              style={styles.inputStyle}
+            />
+            <TouchableOpacity onPress={goToBottom}>
+              <Text style={styles.topBtn}>Bottom</Text>
+            </TouchableOpacity>
+          </View>
+        }
+        ListFooterComponent={renderFooter}
+        ItemSeparatorComponent={renderSeparator}
+        onEndReached={handleMore}
+        onEndReachedThreshold={0.5}
+        refreshing={isLoading}
+        onRefresh={getData}
+        stickyHeaderIndices={[0]}
+        ref={ref => (listViewRef = ref)}
+      />
+      <TouchableOpacity onPress={goToTop} style={styles.bottomBtn}>
+        <Text style={styles.topBtn}>top</Text>
+      </TouchableOpacity>
+    </>
   );
 };
 
@@ -126,9 +151,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#f5fcff',
   },
   itemRow: {
-    borderBottomColor: '#ccc',
-    marginBottom: 10,
-    borderBottomWidth: 1,
+    // borderBottomColor: '#ccc',
+    // marginBottom: 10,
+    // borderBottomWidth: 1,
   },
   itemImage: {
     width: '100%',
@@ -145,13 +170,35 @@ const styles = StyleSheet.create({
     marginTop: 10,
     alignItems: 'center',
   },
-  inputWrap: {paddingHorizontal: 15, marginBottom: 10},
+  inputWrap: {
+    paddingHorizontal: 15,
+    marginBottom: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
   inputStyle: {
+    flex: 1,
     borderWidth: 1,
     borderColor: '#ccc',
     paddingLeft: 10,
     borderRadius: 6,
     backgroundColor: '#fff',
     height: Platform.OS === 'ios' ? 40 : 35,
+  },
+  separator: {
+    height: 2,
+    backgroundColor: 'green',
+    width: '100%',
+    marginVertical: 10,
+  },
+  topBtn: {
+    fontSize: 14,
+    marginLeft: 6,
+  },
+  bottomBtn: {
+    position: 'absolute',
+    right: 15,
+    bottom: 15,
   },
 });
