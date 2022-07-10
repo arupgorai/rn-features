@@ -18,3 +18,7 @@
 - 2. Pull to Refresh
 - 3. handle search
 - 4. scroll to top & bottom
+
+#### 4. [AppIconAndName](https://github.com/arupgorai/rn-features/tree/FlatlistApplication)
+
+> In this branch I've added icon for our application and changed app name for both Android and IOS.
