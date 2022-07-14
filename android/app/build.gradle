@@ -1,5 +1,15 @@
 apply plugin: "com.android.application"
 
+project.ext.envConfigFiles = [
+    dev: ".env.dev",
+    prod: ".env.prod",
+    qa: ".env.qa"
+]
+
+
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
+
+
 import com.android.build.OutputFile
 
 /**
@@ -167,6 +177,30 @@ android {
             }
         }
     }
+
+    flavorDimensions "default"
+
+    productFlavors {
+        dev {
+            minSdkVersion rootProject.ext.minSdkVersion
+            applicationId "com.rnfeatures.dev"
+            targetSdkVersion rootProject.ext.targetSdkVersion
+            resValue "string", "build_config_package", "com.rnfeatures"
+        }
+        prod {
+            minSdkVersion rootProject.ext.minSdkVersion
+            applicationId "com.rnfeatures"
+            targetSdkVersion rootProject.ext.targetSdkVersion
+            resValue "string", "build_config_package", "com.rnfeatures"
+        }
+        qa {
+            minSdkVersion rootProject.ext.minSdkVersion
+            applicationId "com.rnfeatures.qa"
+            targetSdkVersion rootProject.ext.targetSdkVersion
+            resValue "string", "build_config_package", "com.rnfeatures"
+        }
+    }
+
 
     if (isNewArchitectureEnabled()) {
         // We configure the NDK build only if you decide to opt-in for the New Architecture.

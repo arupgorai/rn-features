@@ -3,15 +3,28 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "android": "react-native run-android",
+    "android": "react-native run-android --variant=devDebug --appIdSuffix=dev",
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+
+    "android:dev": "react-native run-android --variant=devDebug --appIdSuffix=dev",
+    "android:qa": "react-native run-android --variant=qaDebug --appIdSuffix=qa",
+    "android:prod": "react-native run-android --variant=prodDebug",
+
+    "android:dev-release": "cd android && ./gradlew assembleDevRelease",
+    "android:qa-release": "cd android && ./gradlew assembleQaRelease",
+    "android:prod-release": "cd android && ./gradlew assembleProdRelease",
+
+    "android:dev-debug": "cd android && ./gradlew assembleDevDebug",
+    "android:qa-debug": "cd android && ./gradlew assembleQaDebug",
+    "android:prod-debug": "cd android && ./gradlew assembleProdDebug"
   },
   "dependencies": {
     "react": "18.0.0",
-    "react-native": "0.69.1"
+    "react-native": "0.69.1",
+    "react-native-config": "^1.4.6"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
