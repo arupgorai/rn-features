@@ -19,7 +19,9 @@
 
     "android:dev-debug": "cd android && ./gradlew assembleDevDebug",
     "android:qa-debug": "cd android && ./gradlew assembleQaDebug",
-    "android:prod-debug": "cd android && ./gradlew assembleProdDebug"
+    "android:prod-debug": "cd android && ./gradlew assembleProdDebug",
+
+    "createbundle": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res && rm -rf android/app/src/main/res/drawable-* android/app/src/main/res/raw && cd android && ./gradlew clean && cd .."
   },
   "dependencies": {
     "react": "18.0.0",
