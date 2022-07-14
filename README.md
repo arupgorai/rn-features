@@ -23,6 +23,6 @@
 
 > In this branch I've added icon for our application and changed app name for both Android and IOS.
 
-#### 4. [ProductFlavoursWithEnv](https://github.com/arupgorai/rn-features/tree/ProductFlavoursWithEnv)
+#### 5. [ProductFlavoursWithEnv](https://github.com/arupgorai/rn-features/tree/ProductFlavoursWithEnv)
 
 > In this branch, I've add `build-variant` (_build-variant = build-type + product-flavours_) in our app along different `environments` with the help of [react-native-config](https://github.com/luggit/react-native-config) package. I've also added different `app name` for each variant and different `icons` as well for both **Android** & **IOS** platforms.
