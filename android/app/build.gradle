@@ -138,6 +138,12 @@ def reactNativeArchitectures() {
     return value ? value.split(",") : ["armeabi-v7a", "x86", "x86_64", "arm64-v8a"]
 }
 
+def static renameDebugAPK(variant, versionName) {
+    variant.outputs.all { output ->
+        outputFileName = "MY_APP_" + variant.flavorName + '_' + versionName  + ".apk"
+    }
+}
+
 android {
     ndkVersion rootProject.ext.ndkVersion
 
@@ -186,18 +192,24 @@ android {
             applicationId "com.rnfeatures.dev"
             targetSdkVersion rootProject.ext.targetSdkVersion
             resValue "string", "build_config_package", "com.rnfeatures"
+            versionCode 2
+            versionName "2.0"
         }
         prod {
             minSdkVersion rootProject.ext.minSdkVersion
             applicationId "com.rnfeatures"
             targetSdkVersion rootProject.ext.targetSdkVersion
             resValue "string", "build_config_package", "com.rnfeatures"
+            versionCode 2
+            versionName "2.0"
         }
         qa {
             minSdkVersion rootProject.ext.minSdkVersion
             applicationId "com.rnfeatures.qa"
             targetSdkVersion rootProject.ext.targetSdkVersion
             resValue "string", "build_config_package", "com.rnfeatures"
+            versionCode 2
+            versionName "2.0"
         }
     }
 
@@ -286,6 +298,7 @@ android {
             }
 
         }
+        renameDebugAPK(variant, versionName)
     }
 }
 
