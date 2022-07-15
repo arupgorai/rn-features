@@ -9,6 +9,10 @@
     "test": "jest",
     "lint": "eslint .",
 
+    "ios:dev": "react-native run-ios --scheme 'Dev' --configuration 'DevDebug'",
+    "ios:qa": "react-native run-ios --scheme 'Qa' --configuration 'QaDebug'",
+    "ios:prod": "react-native run-ios --scheme 'Prod' --configuration 'ProdDebug'",
+
     "android:dev": "react-native run-android --variant=devDebug --appIdSuffix=dev",
     "android:qa": "react-native run-android --variant=qaDebug --appIdSuffix=qa",
     "android:prod": "react-native run-android --variant=prodDebug",

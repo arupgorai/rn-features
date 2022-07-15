@@ -4,6 +4,16 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 platform :ios, '12.4'
 install! 'cocoapods', :deterministic_uuids => false
 
+project 'RNFeatures',
+        'DevDebug' => :debug,
+        'DevRelease' => :release, 
+        'QaDebug' => :debug,
+        'QaRelease' => :release,
+        'ProdDebug' => :debug,
+        'ProdRelease' => :release,
+        'Debug' => :debug,
+        'Release' => :release
+
 target 'RNFeatures' do
   config = use_native_modules!
 
@@ -28,7 +38,8 @@ target 'RNFeatures' do
   #
   # Note that if you have use_frameworks! enabled, Flipper will not work and
   # you should disable the next line.
-  use_flipper!()
+  # use_flipper!()
+  use_flipper!(configurations: ['DevDebug','DevRelease','QaDebug','QaRelease','ProdDebug', 'ProdRelease','Debug','Release'])
 
   post_install do |installer|
     react_native_post_install(installer)
