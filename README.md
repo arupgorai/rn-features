@@ -176,3 +176,5 @@ applicationVariants.all { variant ->
         renameDebugAPK(variant, versionName) // 👈 here
     }
 ```
+
+![plot](./dev.png)
