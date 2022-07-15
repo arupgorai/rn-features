@@ -177,4 +177,7 @@ applicationVariants.all { variant ->
     }
 ```
 
-![plot](./dev.png)
+> For IOS, follow below links
+
+1. https://blog.logicwind.com/adding-multiple-target/
+2. https://www.youtube.com/watch?v=8lA0wP-0vEo
