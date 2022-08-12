@@ -1,0 +1,10 @@
+export const NATURE_1 = require('../assets/nature-1.jpg');
+export const NATURE_2 = require('../assets/nature-2.jpg');
+export const NATURE_3 = require('../assets/nature-3.jpg');
+export const NATURE_4 = require('../assets/nature-4.jpg');
+export const NATURE_5 = require('../assets/nature-5.jpg');
+export const NATURE_6 = require('../assets/nature-6.jpg');
+export const NATURE_7 = require('../assets/nature-7.jpg');
+export const NATURE_8 = require('../assets/nature-8.jpg');
+export const NATURE_9 = require('../assets/nature-9.jpg');
+export const NATURE_10 = require('../assets/nature-10.jpg');

@@ -1,5 +1,9 @@
 import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
+
+import {data} from '../constants/data';
+
+console.log('data :-', data);
 
 const ProductList = ({navigation}) => {
   return (
