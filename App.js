@@ -1,11 +1,21 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {createSharedElementStackNavigator} from 'react-navigation-shared-element';
+
+import {ProductList, ProductDetails} from './src/screens';
+
+const Stack = createSharedElementStackNavigator();
 
 const App = () => {
   return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text>Hello app</Text>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator
+        initialRouteName="ProductList"
+        screenOptions={{headerShown: false}}>
+        <Stack.Screen name="ProductList" component={ProductList} />
+        <Stack.Screen name="ProductDetails" component={ProductDetails} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 
