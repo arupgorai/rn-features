@@ -1,12 +1,16 @@
-import React from 'react';
+import React, {
+  createRef,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import {View, Text} from 'react-native';
 
+import TabsWithFlatlist from './src/components/TabsWithFlatlist';
+
 const App = () => {
-  return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text>hello arup</Text>
-    </View>
-  );
+  return <TabsWithFlatlist />;
 };
 
 export default App;
