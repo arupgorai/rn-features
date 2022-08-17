@@ -9,11 +9,12 @@ import InterPolateColor from './src/components/5_InterpolateColors';
 import Rotations from './src/components/6_Rotation';
 import AbsolutePosition from './src/components/7_AbsolutePosition';
 import Scale from './src/components/8_Scale';
+import WidthAndHeightPercentage from './src/components/9_WidthAndHeightPercentage';
 
 const {width: SCREEN_WIDTH, height: SCREEN_HEIGHT} = Dimensions.get('window');
 
 const App = () => {
-  return <Scale />;
+  return <WidthAndHeightPercentage />;
 };
 
 export default App;
