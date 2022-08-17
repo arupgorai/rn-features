@@ -10,7 +10,9 @@ import Animated, {
 const Opacity = () => {
   const animation = useSharedValue(1);
   const rStyle = useAnimatedStyle(() => ({
-    opacity: withTiming(animation.value, {duration: 3000}),
+    opacity: withTiming(animation.value, {duration: 3000}, () => {
+      animation.value = 1;
+    }),
   }));
 
   return (
