@@ -12,11 +12,12 @@ import Animated, {
 } from 'react-native-reanimated';
 import Opacity from './src/components/1_Opacity';
 import TranslateX from './src/components/2_TranslateX';
+import WidthAndHeight from './src/components/3_WidthAndHeight';
 
 const {width: SCREEN_WIDTH, height: SCREEN_HEIGHT} = Dimensions.get('window');
 
 const App = () => {
-  return <TranslateX />;
+  return <WidthAndHeight />;
 };
 
 export default App;
