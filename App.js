@@ -11,11 +11,12 @@ import AbsolutePosition from './src/components/7_AbsolutePosition';
 import Scale from './src/components/8_Scale';
 import WidthAndHeightPercentage from './src/components/9_WidthAndHeightPercentage';
 import WithSpringExample from './src/components/10_WithSpringExample';
+import EasingExample from './src/components/11_EasingExample';
 
 const {width: SCREEN_WIDTH, height: SCREEN_HEIGHT} = Dimensions.get('window');
 
 const App = () => {
-  return <WithSpringExample />;
+  return <EasingExample />;
 };
 
 export default App;
