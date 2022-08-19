@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, Dimensions} from 'react-native';
+import { View, Text, Button, Dimensions } from 'react-native';
 
 /*
 import {
@@ -17,11 +17,31 @@ import {
 } from './src/components/basics';
 */
 import HideHeaderOnScroll from './src/components/hide-header-on-scroll';
-
-const {width: SCREEN_WIDTH, height: SCREEN_HEIGHT} = Dimensions.get('window');
+import ModalBox from './src/components/ModalBox';
+import { useSharedValue, withDelay, withTiming } from 'react-native-reanimated';
+const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 
 const App = () => {
-  return <HideHeaderOnScroll />;
+  const filterModalSharedValue1 = useSharedValue(SCREEN_HEIGHT);
+  const filterModalSharedValue2 = useSharedValue(SCREEN_HEIGHT);
+  return (
+    <>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>Hello arup</Text>
+        <Button
+          title="Open Modal"
+          onPress={() => {
+            filterModalSharedValue1.value = withTiming(0, { duration: 100 });
+            filterModalSharedValue2.value = withDelay(100, withTiming(0, { duration: 500 }));
+          }}
+        />
+      </View>
+      <ModalBox
+        filterModalSharedValue1={filterModalSharedValue1}
+        filterModalSharedValue2={filterModalSharedValue2}
+      />
+    </>
+  );
 };
 
 export default App;
