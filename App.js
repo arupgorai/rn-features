@@ -9,4 +9,4 @@ export default App;
 
 const styles = StyleSheet.create({});
 
-// time :- 25:57
+// time :- 01:04:00
