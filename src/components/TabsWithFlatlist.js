@@ -46,6 +46,7 @@ const TabIndicator = ({measureLayout, scrollX}) => {
 const Tabs = ({scrollX, onPressTab}) => {
   const [measureLayout, setMeasureLayout] = useState([]);
   const containerRef = useRef();
+  const tabPosition = Animated.divide(scrollX, SCREEN_WIDTH);
 
   useEffect(() => {
     let ml = [];
@@ -67,15 +68,25 @@ const Tabs = ({scrollX, onPressTab}) => {
   return (
     <View style={{flex: 1, flexDirection: 'row'}} ref={containerRef}>
       {/* Tab  */}
-      {TAB_LIST.map((tab, index) => (
-        <TouchableOpacity
-          ref={tab.ref}
-          key={`Tab-${index}`}
-          onPress={() => onPressTab(index)}
-          style={styles.tabItem}>
-          <Text>{tab.label}</Text>
-        </TouchableOpacity>
-      ))}
+      {TAB_LIST.map((tab, index) => {
+        const textColor = tabPosition.interpolate({
+          inputRange: [index - 1, index, index + 1],
+          outputRange: ['#245ab3', '#ab170c', '#245ab3'],
+          extrapolate: 'clamp',
+        });
+
+        return (
+          <TouchableOpacity
+            ref={tab.ref}
+            key={`Tab-${index}`}
+            onPress={() => onPressTab(index)}
+            style={styles.tabItem}>
+            <Animated.Text style={{color: textColor}}>
+              {tab.label}
+            </Animated.Text>
+          </TouchableOpacity>
+        );
+      })}
 
       {/* Tab Indicator  */}
       {measureLayout.length > 0 && (
